@@ -1,23 +1,15 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import Login from '../views/login.vue';
 import Home from '../views/home.vue';
+import { getCookies } from '../../utils/utilities';
+
 
 const routes = [
   {
     path: '/login',
     name: 'Login',
     beforeEnter: (to, from, next) => {
-      const cookies = document.cookie
-        .split(';')
-        .map((cookie) => cookie.split('='))
-        .reduce(
-          (accumulator, [key, value]) => ({
-            ...accumulator,
-            [key.trim()]: decodeURIComponent(value)
-          }),
-          {}
-        );
-
+      const cookies = getCookies()
       if (cookies.token) {
         next('/home');
       } else {
@@ -30,17 +22,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     beforeEnter: (to, from, next) => {
-      const cookies = document.cookie
-        .split(';')
-        .map((cookie) => cookie.split('='))
-        .reduce(
-          (accumulator, [key, value]) => ({
-            ...accumulator,
-            [key.trim()]: decodeURIComponent(value)
-          }),
-          {}
-        );
-
+      const cookies = getCookies()
       if (cookies.token) {
         next();
       } else {

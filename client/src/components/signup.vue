@@ -3,33 +3,54 @@ import { useUserStore } from '../stores/user.js';
 import router from '../router/index.js';
 import { ref } from 'vue';
 import axios from 'axios';
+import {validateEmail} from '../../utils/utilities'
+
 const user = useUserStore();
 
 const showError = ref(false);
 const errorMessage = ref('');
 
 function toggle() {
-  document.getElementById("toggleButton").click();
+  document.getElementById('toggleButton').click();
 }
 
 const handleSignUp = async (e) => {
   e.preventDefault();
-  const response = await axios.post('http://localhost:5000/createUser', {
-    email: user.email,
-    password: user.password,
-    name: user.name
-  });
-  if (response.status === 200) {
-    showError.value = false
-    let d = new Date();
-    d.setTime(d.getTime() + 1 * 4 * 60 * 60 * 1000);
-    let expires = 'expires=' + d.toUTCString();
-    document.cookie = 'token=' + response.data.token + ';' + expires;
-    toggle()
-    router.push({ name: 'Home' });
-  } else if (response.status === 202) {
-    showError.value = true;
-    errorMessage.value = response.data.error;
+
+  if (
+    user.name.length === 0 ||
+    user.email.length === 0 ||
+    user.password.length === 0
+  ) {
+    errorMessage.value = "Input Feilds Can't be Empty";
+    showError.value = true
+  }else if(!validateEmail(user.email)){
+    errorMessage.value = "Please Enter a valid E-mail id."
+    showError.value = true
+  }else {
+    const response = await axios.post('http://localhost:5000/auth/createUser', {
+      email: user.email,
+      password: user.password,
+      name: user.name
+    });
+    switch (response.status) {
+      case 200:
+        showError.value = false;
+        let d = new Date();
+        d.setTime(d.getTime() + 1 * 4 * 60 * 60 * 1000);
+        let expires = 'expires=' + d.toUTCString();
+        document.cookie = 'token=' + response.data.token + ';' + expires;
+        toggle();
+        router.push({ name: 'Home' });
+        break;
+
+      case 202:
+        showError.value = true;
+        errorMessage.value = response.data.error;
+
+      default:
+        break;
+    }
   }
 };
 </script>
@@ -84,7 +105,7 @@ const handleSignUp = async (e) => {
                   id="name"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Your Name"
-                  required=""
+                  required
                   v-model="user.name"
                 />
               </div>
@@ -100,7 +121,7 @@ const handleSignUp = async (e) => {
                   id="email"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Your Email"
-                  required=""
+                  required
                   v-model="user.email"
                 />
               </div>
@@ -116,7 +137,7 @@ const handleSignUp = async (e) => {
                   id="password"
                   placeholder="Your Password"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  required=""
+                  required
                   v-model="user.password"
                 />
               </div>
@@ -144,4 +165,3 @@ const handleSignUp = async (e) => {
 </template>
 
 <style></style>
- 

@@ -12,7 +12,7 @@ const errorMessage = ref("")
 
 
 const handeLogIn = async () => {
-  const response = await axios.post('http://localhost:5000/login', {
+  const response = await axios.post('http://localhost:5000/auth/login', {
     email: user.email,
     password: user.password
   });
@@ -66,6 +66,7 @@ const handeLogIn = async () => {
           </div>
           
           <button
+            type="submit"
             @click="handeLogIn"
             class="text-white bg-blue-300 border px-4 py-2 hover:bg-blue-700 rounded-full"
           >
