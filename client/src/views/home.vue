@@ -64,5 +64,8 @@ onMounted(async () => {
 <style>
 html {
   background-color: #eeeeee;
+  overflow-y : scroll;
 }
+
+
 </style>
