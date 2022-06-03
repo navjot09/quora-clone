@@ -1,6 +1,5 @@
 const express = require('express')
 const bcrypt = require('bcryptjs');
-const bodyParser = require('body-parser')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
@@ -23,10 +22,11 @@ router.post("/createUser", async (req, res) => {
                     title: "error",
                     error: "User Already Registered."
                 })
-            }85
+            }
             const data = {
                 user: {
-                    id: user.id
+                    id: user.id,
+                    name : user.name
                 }
             }
             const authToken = jwt.sign(data, JWT_SECRET);
@@ -55,7 +55,8 @@ router.post("/login", async (req, res) => {
         }
         const data = {
             user: {
-                id: user.id
+                id: user.id,
+                name : user.name
             }
         }
         const authToken = jwt.sign(data, JWT_SECRET);

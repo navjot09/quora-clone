@@ -2,7 +2,8 @@ const express = require('express')
 const connectToMongo = require('./database');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
+const Question = require('./models/question.js')
+const Answer = require('./models/answer')
 const app = express()
 connectToMongo()
 
@@ -19,3 +20,5 @@ app.get("/", function (req, res) {
 app.listen(5000, () => console.log("server is up and running"))
 
 app.use('/auth', require('./routes/auth'));
+app.use('/posts', require('./routes/posts'));
+
