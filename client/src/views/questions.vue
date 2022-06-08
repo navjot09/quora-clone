@@ -58,7 +58,7 @@ onMounted(getAnswers());
             <Post
               v-for="(post, index) in posts.list"
               :key="index"
-              :Answer="post.text"
+              :Answer="post"
               :Question="post.question"
               :PostedBy="post.postedBy"
             />

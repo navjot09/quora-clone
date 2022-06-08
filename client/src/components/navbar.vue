@@ -12,12 +12,12 @@
       >
         <ul class="flex flex-col md:flex-row">
           <li class="mx-auto">
-            <router-link class="text-3xl" active-class="text-red-600 border-b-2 border-red-600" to="/home">
+            <router-link class="text-3xl" active-class="text-red-600" to="/home">
               <fa class="mx-6" icon="house" />
             </router-link>
           </li>
           <li class="mx-auto">
-            <router-link active-class="text-red-600 border-b-2 border-red-600" class=" text-3xl" to="/answer">
+            <router-link active-class="text-red-600" class=" text-3xl" to="/answer">
               <fa class=" mx-6" icon="pen-to-square" />
             </router-link>
           </li>
