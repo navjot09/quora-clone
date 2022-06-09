@@ -38,17 +38,45 @@ const routes = [
   {
     path: '/answer',
     name: 'Answer',
+    beforeEnter: (to, from, next) => {
+      const cookies = getCookies()
+      if (cookies.token) {
+        next();
+      } else {
+        next('/login');
+      }
+    },
     component: Answer
   },
   {
     path : '/questions/:text/:id',
     name : 'Questions',
+    beforeEnter: (to, from, next) => {
+      const cookies = getCookies()
+      if (cookies.token) {
+        next();
+      } else {
+        next('/login');
+      }
+    },
     component : Question
   },
   {
     path : '/profile/:id',
     name : 'Profile',
+    beforeEnter: (to, from, next) => {
+      const cookies = getCookies()
+      if (cookies.token) {
+        next();
+      } else {
+        next('/login');
+      }
+    },
     component : Profile
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/login'
   }
   
 ];

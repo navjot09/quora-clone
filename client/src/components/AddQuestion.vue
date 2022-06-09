@@ -29,8 +29,10 @@ const addQuestion = async () => {
         }
       }
     );
-    questionText.value = '';
-    tag.value = '';
+    if(res.status === 200){
+      questionText.value = '';
+      tag.value = '';
+    }
   }
 };
 </script>

@@ -6,15 +6,15 @@ import { getCookies } from '../../utils/utilities';
 
 const cookies = getCookies();
 const props = defineProps({
-  Question: Object,
-  Answer: Object,
-  PostedBy: Object
+  question: Object,
+  answer: Object,
+  postedBy: Object
 });
 
 const isUpvote = ref(false);
 const isDownvote = ref(false);
 const showModal = ref(false);
-const upvoteCount = ref(props.Answer.upvotes);
+const upvoteCount = ref(props.answer.upvotes);
 const upvotesList = ref([]);
 
 onMounted(() => {
@@ -24,9 +24,9 @@ onMounted(() => {
 
 const isUpvoted = async () => {
   const res = await axios.post(
-    'http://localhost:5000/posts/isUpvoted',
+    'http://localhost:5000/votes/isUpvoted',
     {
-      answerId: props.Answer._id
+      answerId: props.answer._id
     },
     {
       headers: {
@@ -34,14 +34,16 @@ const isUpvoted = async () => {
       }
     }
   );
-  isUpvote.value = res.data.isUpvoted;
+  if(res.status === 200){
+    isUpvote.value = res.data.isUpvoted;
+  }
 };
 
 const isDownvoted = async () => {
   const res = await axios.post(
-    'http://localhost:5000/posts/isDownvoted',
+    'http://localhost:5000/votes/isDownvoted',
     {
-      answerId: props.Answer._id
+      answerId: props.answer._id
     },
     {
       headers: {
@@ -49,9 +51,9 @@ const isDownvoted = async () => {
       }
     }
   );
-  console.log(res.data);
-  isDownvote.value = res.data.isDownvoted;
-  console.log(isDownvote.value);
+  if(res.status === 200){
+    isDownvote.value = res.data.isDownvoted;
+  }
 };
 
 const openModal = () => {
@@ -65,9 +67,9 @@ const closeModal = () => {
 
 const getAllUpvotes = async () => {
   const res = await axios.post(
-    'http://localhost:5000/posts/allUpvotes',
+    'http://localhost:5000/votes/allUpvotes',
     {
-      answerId: props.Answer._id
+      answerId: props.answer._id
     },
     {
       headers: {
@@ -75,7 +77,10 @@ const getAllUpvotes = async () => {
       }
     }
   );
-  upvotesList.value = res.data;
+
+  if(res.status === 200){
+    upvotesList.value = res.data;
+  }
 };
 
 const upvote = async () => {
@@ -83,9 +88,9 @@ const upvote = async () => {
   isUpvote.value = true;
   upvoteCount.value += 1;
   const res = await axios.post(
-    'http://localhost:5000/posts/upvote',
+    'http://localhost:5000/votes/upvote',
     {
-      answerId: props.Answer._id,
+      answerId: props.answer._id,
       upvotes: upvoteCount.value
     },
     {
@@ -100,9 +105,9 @@ const downvote = async () => {
   removeUpvote()
   isDownvote.value = true;
   const res = await axios.post(
-    'http://localhost:5000/posts/downvote',
+    'http://localhost:5000/votes/downvote',
     {
-      answerId: props.Answer._id,
+      answerId: props.answer._id,
     },
     {
       headers: {
@@ -115,9 +120,9 @@ const downvote = async () => {
 const removeDownvote = async () => {
   isDownvote.value = false;
   const res = await axios.post(
-    'http://localhost:5000/posts/removeDownvote',
+    'http://localhost:5000/votes/removeDownvote',
     {
-      answerId: props.Answer._id,
+      answerId: props.answer._id,
     },
     {
       headers: {
@@ -133,9 +138,9 @@ const removeUpvote = async () => {
   }
   isUpvote.value = false;
   const res = await axios.post(
-    'http://localhost:5000/posts/removeUpvote',
+    'http://localhost:5000/votes/removeUpvote',
     {
-      answerId: props.Answer._id,
+      answerId: props.answer._id,
       upvotes: upvoteCount.value
     },
     {
@@ -153,7 +158,7 @@ const removeUpvote = async () => {
         <img class="h-12" src="@/assets/user-icon.png" alt="" />
       </div>
       <div class="mx-2 font-semibold items-center flex">
-        <h1>{{ PostedBy.name }}</h1>
+        <h1>{{ postedBy.name }}</h1>
       </div>
     </div>
     <div class="py-2 font-bold text-lg px-2">
@@ -161,15 +166,15 @@ const removeUpvote = async () => {
         class="hover:underline"
         :to="{
           name: 'Questions',
-          params: { text: Question.text, id: Question.id }
+          params: { text: question.text, id: question.id }
         }"
       >
-        {{ Question.text }}
+        {{ question.text }}
       </router-link>
     </div>
     <div>
       <p class="p-2">
-        {{ Answer.text }}
+        {{ answer.text }}
       </p>
     </div>
     <div class="my-2 flex">

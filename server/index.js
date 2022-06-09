@@ -21,4 +21,4 @@ app.listen(5000, () => console.log("server is up and running"))
 
 app.use('/auth', require('./routes/auth'));
 app.use('/posts', require('./routes/posts'));
-
+app.use('/votes', require('./routes/votes'));

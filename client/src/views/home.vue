@@ -27,8 +27,10 @@ onMounted(async () => {
       }
     }
   );
-  posts.value = res.data;
-  console.log(posts.value)
+
+  if(res.status === 200){
+    posts.value = res.data;
+  }
   loader.loading = false;
 });
 </script>
@@ -50,9 +52,9 @@ onMounted(async () => {
             <Post
               v-for="(post, index) in posts"
               :key="index"
-              :Answer="post"
-              :Question="post.question"
-              :PostedBy="post.postedBy"
+              :answer="post"
+              :question="post.question"
+              :posted-by="post.postedBy"
             />
           </div>
         </div>

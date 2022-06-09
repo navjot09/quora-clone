@@ -37,10 +37,12 @@ const handleSubmitAnswer = async () => {
         }
       }
     );
-
+    
+  if(res.status === 200){
     showAnswer.value = false;
     answer.value = '';
     posts.list = [res.data, ...posts.list];
+  }
   }
 };
 </script>

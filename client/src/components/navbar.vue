@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import router from '../router/index.js';
+const logout = async () => {
+  await cookieStore.delete('token')
+  router.push('/login')
+}
+
+</script>
 
 <template>
   <div class="sticky top-0 w-full bg-white mb-6">
@@ -36,7 +43,10 @@
         type="text"
         placeholder="Search Quora"
       />
-        <img class="h-8" src="@/assets/user-icon.png" alt="" />
+      <img class="h-8" src="@/assets/user-icon.png" alt="" />
+      <button class="px-2" @click="logout">
+      <fa class="text-3xl" icon="right-from-bracket" />
+      </button>
       <button
         data-collapse-toggle="mobile-menu-4"
         type="button"
