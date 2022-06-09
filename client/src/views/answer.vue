@@ -24,7 +24,9 @@ onMounted(async () => {
       }
     }
   );
-  questions.value = res.data;
+  if(res.status === 200){
+    questions.value = res.data;
+  }
   loader.loading = false;
 });
 </script>

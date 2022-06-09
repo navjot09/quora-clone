@@ -6,6 +6,10 @@ const ansSchema = new Schema({
         type : String,
         required : true,
     },
+    upvotes : {
+        type : Number,
+        default : 0
+    },
     question : {
         type : {
             id : mongoose.Schema.Types.ObjectId,

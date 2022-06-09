@@ -36,9 +36,8 @@ router.post("/createUser", async (req, res) => {
             })
         })
     } catch (error) {
-        res.send(error)
+        res.status(400).send(error)
     }
-
 })
 
 router.post("/login", async (req, res) => {
@@ -65,7 +64,7 @@ router.post("/login", async (req, res) => {
             token: authToken
         })
     } catch (error) {
-        res.send(error)
+        res.status(400).send(error)
     }
 })
 

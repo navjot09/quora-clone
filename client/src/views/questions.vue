@@ -16,7 +16,6 @@ const posts = usePostStore()
 const route = useRoute();
 const cookies = getCookies();
 
-
 const getAnswers = async () => {
   loader.loading = true;
   const res = await axios.post(
@@ -31,7 +30,10 @@ const getAnswers = async () => {
       }
     }
   );
-  posts.list = res.data;
+
+  if(res.status === 200){
+    posts.list = res.data;
+  }
   loader.loading = false;
 };
 
@@ -58,9 +60,9 @@ onMounted(getAnswers());
             <Post
               v-for="(post, index) in posts.list"
               :key="index"
-              :Answer="post.text"
-              :Question="post.question"
-              :PostedBy="post.postedBy"
+              :answer="post"
+              :question="post.question"
+              :posted-by="post.postedBy"
             />
           </div>
         </div>
