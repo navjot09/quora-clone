@@ -42,7 +42,7 @@ const addQuestion = async () => {
     class="border border-slate-200 bg-white mx-auto w-full items-center px-2 py-2"
   >
     <div class="flex w-full">
-      <img class="h-10" src="src/assets/user-icon.png" alt="" />
+      <img class="h-10" src="@/assets/user-icon.png" alt="" />
       <input
         v-model="questionText"
         class="h-10 w-full m-2 rounded-full"

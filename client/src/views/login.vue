@@ -34,7 +34,7 @@ const handeLogIn = async () => {
   >
     <div class="rounded-md bg-white border mx-auto p-10 w-fit">
       <div class="text-center align-middle text-xl">
-        <img class="mx-auto h-20" src="src/assets/QuoraLogo.png" alt="" />
+        <img class="mx-auto h-20" src="@/assets/QuoraLogo.png" alt="" />
         <p>A place to share knowlege and better understand the world</p>
       </div>
       <div class="pt-4 text-lg mx-5">
