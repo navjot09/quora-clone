@@ -18,7 +18,7 @@ onMounted(async () => {
   loader.loading = true;
 
   const res = await axios.post(
-    'http://localhost:8080/posts/getAllAnswers',
+    `${import.meta.env.VITE_API}/posts/getAllAnswers`,
     {},
     {
       headers: {

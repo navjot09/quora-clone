@@ -11,7 +11,7 @@ const showError = ref(false);
 const errorMessage = ref('');
 
 const handeLogIn = async () => {
-  const response = await axios.post('http://localhost:8080/auth/login', {
+  const response = await axios.post(`${import.meta.env.VITE_API}/auth/login`, {
     email: user.email,
     password: user.password
   });

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const connectToMongo = require("./database");
 const cors = require("cors");
@@ -17,7 +18,7 @@ app.get("/", function (req, res) {
   res.send("hello world");
 });
 
-app.listen(8080, () => console.log("server is up and running"));
+app.listen(process.env.PORT, () => console.log("server is up and running"));
 
 app.use("/auth", require("./routes/auth"));
 app.use("/posts", require("./routes/posts"));

@@ -17,7 +17,7 @@ const addQuestion = async () => {
     showError.value = false;
     errorMessage.value = '';
     const res = await axios.post(
-      'http://localhost:8080/posts/addQuestion',
+      `${import.meta.env.VITE_API}/posts/addQuestion`,
       {
         text: questionText.value,
         tag: tag.value === '' ? 'General' : tag.value

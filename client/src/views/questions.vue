@@ -19,7 +19,7 @@ const cookies = getCookies();
 const getAnswers = async () => {
   loader.loading = true;
   const res = await axios.post(
-    'http://localhost:8080/posts/getAnswers',
+    `${import.meta.env.VITE_API}/posts/getAnswers`,
     {
       questionId: route.params.id
     },
