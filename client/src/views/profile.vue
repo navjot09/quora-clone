@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <router-view />
+  <div>
+    {{ route.params.id }}
+  </div>
 </template>
 
 <style></style>
