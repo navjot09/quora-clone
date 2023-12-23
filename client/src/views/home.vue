@@ -6,20 +6,19 @@ import AddQuestion from '../components/AddQuestion.vue';
 import axios from 'axios';
 import { getCookies } from '../../utils/utilities';
 import { onMounted, ref } from '@vue/runtime-core';
-import Loading from '../components/loading.vue'
-import { useLoaderStore } from '../stores/loader'
+import Loading from '../components/loading.vue';
+import { useLoaderStore } from '../stores/loader';
 
-const loader = useLoaderStore()
+const loader = useLoaderStore();
 
 const cookies = getCookies();
 const posts = ref([]);
-
 
 onMounted(async () => {
   loader.loading = true;
 
   const res = await axios.post(
-    'http://localhost:5000/posts/getAllAnswers',
+    'http://localhost:8080/posts/getAllAnswers',
     {},
     {
       headers: {
@@ -28,7 +27,7 @@ onMounted(async () => {
     }
   );
 
-  if(res.status === 200){
+  if (res.status === 200) {
     posts.value = res.data;
   }
   loader.loading = false;
@@ -67,8 +66,6 @@ onMounted(async () => {
 <style>
 html {
   background-color: #eeeeee;
-  overflow-y : scroll;
+  overflow-y: scroll;
 }
-
-
 </style>

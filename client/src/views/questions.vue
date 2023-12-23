@@ -8,10 +8,10 @@ import Post from '../components/post.vue';
 import Questions from '../components/questions.vue';
 import Loading from '../components/loading.vue';
 import { useLoaderStore } from '../stores/loader';
-import { usePostStore } from '../stores/posts'
+import { usePostStore } from '../stores/posts';
 
 const loader = useLoaderStore();
-const posts = usePostStore()
+const posts = usePostStore();
 
 const route = useRoute();
 const cookies = getCookies();
@@ -19,7 +19,7 @@ const cookies = getCookies();
 const getAnswers = async () => {
   loader.loading = true;
   const res = await axios.post(
-    'http://localhost:5000/posts/getAnswers',
+    'http://localhost:8080/posts/getAnswers',
     {
       questionId: route.params.id
     },
@@ -31,7 +31,7 @@ const getAnswers = async () => {
     }
   );
 
-  if(res.status === 200){
+  if (res.status === 200) {
     posts.list = res.data;
   }
   loader.loading = false;

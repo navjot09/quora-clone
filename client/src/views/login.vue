@@ -2,17 +2,16 @@
 import Signup from '../components/signup.vue';
 import router from '../router/index';
 import axios from 'axios';
-import {ref} from "vue"
+import { ref } from 'vue';
 import { useUserStore } from '../stores/user.js';
 
 const user = useUserStore();
 
-const showError = ref(false)
-const errorMessage = ref("")
-
+const showError = ref(false);
+const errorMessage = ref('');
 
 const handeLogIn = async () => {
-  const response = await axios.post('http://localhost:5000/auth/login', {
+  const response = await axios.post('http://localhost:8080/auth/login', {
     email: user.email,
     password: user.password
   });
@@ -21,11 +20,10 @@ const handeLogIn = async () => {
     d.setTime(d.getTime() + 1 * 4 * 60 * 60 * 1000);
     let expires = 'expires=' + d.toUTCString();
     document.cookie = 'token=' + response.data.token + ';' + expires;
-    router.push({ name: 'Home' })
-
-  }else if(response.status === 202 ){
+    router.push({ name: 'Home' });
+  } else if (response.status === 202) {
     showError.value = true;
-    errorMessage.value = response.data.error
+    errorMessage.value = response.data.error;
   }
 };
 </script>
@@ -60,11 +58,15 @@ const handeLogIn = async () => {
           v-model="user.password"
         />
         <div class="flex justify-between">
-          <div v-if="showError" class=" space-x-2 flex text-red-700">
-            <img class=" w-6 h-6" src="https://cdn-icons-png.flaticon.com/512/179/179386.png" alt="">
-            <h1>{{errorMessage}}</h1>
+          <div v-if="showError" class="space-x-2 flex text-red-700">
+            <img
+              class="w-6 h-6"
+              src="https://cdn-icons-png.flaticon.com/512/179/179386.png"
+              alt=""
+            />
+            <h1>{{ errorMessage }}</h1>
           </div>
-          
+
           <button
             type="submit"
             @click="handeLogIn"
@@ -75,7 +77,6 @@ const handeLogIn = async () => {
         </div>
         <Signup />
       </div>
-      
     </div>
   </div>
 </template>

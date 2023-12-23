@@ -1,8 +1,8 @@
-import { defineStore } from "pinia"
+import { defineStore } from 'pinia';
 
 export const useLoaderStore = defineStore({
-    id : "loading",
-    state : () => ({
-        loading : false,
-    })
-})
+  id: 'loading',
+  state: () => ({
+    loading: false
+  })
+});

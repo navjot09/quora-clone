@@ -18,13 +18,13 @@ const upvoteCount = ref(props.answer.upvotes);
 const upvotesList = ref([]);
 
 onMounted(() => {
-  isUpvoted()
-  isDownvoted()
+  isUpvoted();
+  isDownvoted();
 });
 
 const isUpvoted = async () => {
   const res = await axios.post(
-    'http://localhost:5000/votes/isUpvoted',
+    'http://localhost:8080/votes/isUpvoted',
     {
       answerId: props.answer._id
     },
@@ -34,14 +34,14 @@ const isUpvoted = async () => {
       }
     }
   );
-  if(res.status === 200){
+  if (res.status === 200) {
     isUpvote.value = res.data.isUpvoted;
   }
 };
 
 const isDownvoted = async () => {
   const res = await axios.post(
-    'http://localhost:5000/votes/isDownvoted',
+    'http://localhost:8080/votes/isDownvoted',
     {
       answerId: props.answer._id
     },
@@ -51,7 +51,7 @@ const isDownvoted = async () => {
       }
     }
   );
-  if(res.status === 200){
+  if (res.status === 200) {
     isDownvote.value = res.data.isDownvoted;
   }
 };
@@ -67,7 +67,7 @@ const closeModal = () => {
 
 const getAllUpvotes = async () => {
   const res = await axios.post(
-    'http://localhost:5000/votes/allUpvotes',
+    'http://localhost:8080/votes/allUpvotes',
     {
       answerId: props.answer._id
     },
@@ -78,17 +78,17 @@ const getAllUpvotes = async () => {
     }
   );
 
-  if(res.status === 200){
+  if (res.status === 200) {
     upvotesList.value = res.data;
   }
 };
 
 const upvote = async () => {
-  removeDownvote()
+  removeDownvote();
   isUpvote.value = true;
   upvoteCount.value += 1;
   const res = await axios.post(
-    'http://localhost:5000/votes/upvote',
+    'http://localhost:8080/votes/upvote',
     {
       answerId: props.answer._id,
       upvotes: upvoteCount.value
@@ -102,12 +102,12 @@ const upvote = async () => {
 };
 
 const downvote = async () => {
-  removeUpvote()
+  removeUpvote();
   isDownvote.value = true;
   const res = await axios.post(
-    'http://localhost:5000/votes/downvote',
+    'http://localhost:8080/votes/downvote',
     {
-      answerId: props.answer._id,
+      answerId: props.answer._id
     },
     {
       headers: {
@@ -120,9 +120,9 @@ const downvote = async () => {
 const removeDownvote = async () => {
   isDownvote.value = false;
   const res = await axios.post(
-    'http://localhost:5000/votes/removeDownvote',
+    'http://localhost:8080/votes/removeDownvote',
     {
-      answerId: props.answer._id,
+      answerId: props.answer._id
     },
     {
       headers: {
@@ -133,12 +133,12 @@ const removeDownvote = async () => {
 };
 
 const removeUpvote = async () => {
-  if(isUpvote.value){
+  if (isUpvote.value) {
     upvoteCount.value -= 1;
   }
   isUpvote.value = false;
   const res = await axios.post(
-    'http://localhost:5000/votes/removeUpvote',
+    'http://localhost:8080/votes/removeUpvote',
     {
       answerId: props.answer._id,
       upvotes: upvoteCount.value

@@ -3,7 +3,7 @@ import { useUserStore } from '../stores/user.js';
 import router from '../router/index.js';
 import { ref } from 'vue';
 import axios from 'axios';
-import {validateEmail} from '../../utils/utilities'
+import { validateEmail } from '../../utils/utilities';
 
 const user = useUserStore();
 
@@ -23,12 +23,12 @@ const handleSignUp = async (e) => {
     user.password.length === 0
   ) {
     errorMessage.value = "Input Feilds Can't be Empty";
-    showError.value = true
-  }else if(!validateEmail(user.email)){
-    errorMessage.value = "Please Enter a valid E-mail id."
-    showError.value = true
-  }else {
-    const response = await axios.post('http://localhost:5000/auth/createUser', {
+    showError.value = true;
+  } else if (!validateEmail(user.email)) {
+    errorMessage.value = 'Please Enter a valid E-mail id.';
+    showError.value = true;
+  } else {
+    const response = await axios.post('http://localhost:8080/auth/createUser', {
       email: user.email,
       password: user.password,
       name: user.name

@@ -16,7 +16,7 @@ const cookies = getCookies();
 onMounted(async () => {
   loader.loading = true;
   const res = await axios.post(
-    'http://localhost:5000/posts/getAllQuestions',
+    'http://localhost:8080/posts/getAllQuestions',
     {},
     {
       headers: {
@@ -24,7 +24,7 @@ onMounted(async () => {
       }
     }
   );
-  if(res.status === 200){
+  if (res.status === 200) {
     questions.value = res.data;
   }
   loader.loading = false;

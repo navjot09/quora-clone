@@ -1,10 +1,9 @@
 <script setup>
 import router from '../router/index.js';
 const logout = async () => {
-  await cookieStore.delete('token')
-  router.push('/login')
-}
-
+  await cookieStore.delete('token');
+  router.push('/login');
+};
 </script>
 
 <template>
@@ -19,21 +18,26 @@ const logout = async () => {
       >
         <ul class="flex flex-col md:flex-row">
           <li class="mx-auto">
-            <router-link class="text-3xl" active-class="text-red-600" to="/home">
+            <router-link
+              class="text-3xl"
+              active-class="text-red-600"
+              to="/home"
+            >
               <fa class="mx-6" icon="house" />
             </router-link>
           </li>
           <li class="mx-auto">
-            <router-link active-class="text-red-600" class=" text-3xl" to="/answer">
-              <fa class=" mx-6" icon="pen-to-square" />
+            <router-link
+              active-class="text-red-600"
+              class="text-3xl"
+              to="/answer"
+            >
+              <fa class="mx-6" icon="pen-to-square" />
             </router-link>
           </li>
           <li class="mx-auto">
-            <router-link class=" text-3xl" to="">
-              <fa
-                class="mx-6"
-                :icon="['far', 'bell']"
-              />
+            <router-link class="text-3xl" to="">
+              <fa class="mx-6" :icon="['far', 'bell']" />
             </router-link>
           </li>
         </ul>
@@ -45,7 +49,7 @@ const logout = async () => {
       />
       <img class="h-8" src="@/assets/user-icon.png" alt="" />
       <button class="px-2" @click="logout">
-      <fa class="text-3xl" icon="right-from-bracket" />
+        <fa class="text-3xl" icon="right-from-bracket" />
       </button>
       <button
         data-collapse-toggle="mobile-menu-4"
@@ -84,5 +88,4 @@ const logout = async () => {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

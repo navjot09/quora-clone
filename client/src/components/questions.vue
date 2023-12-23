@@ -22,7 +22,7 @@ const handleSubmitAnswer = async () => {
     showError.value = false;
     errorMessage.value = '';
     const res = await axios.post(
-      'http://localhost:5000/posts/addAnswer',
+      'http://localhost:8080/posts/addAnswer',
       {
         text: answer.value,
         question: {
@@ -37,12 +37,12 @@ const handleSubmitAnswer = async () => {
         }
       }
     );
-    
-  if(res.status === 200){
-    showAnswer.value = false;
-    answer.value = '';
-    posts.list = [res.data, ...posts.list];
-  }
+
+    if (res.status === 200) {
+      showAnswer.value = false;
+      answer.value = '';
+      posts.list = [res.data, ...posts.list];
+    }
   }
 };
 </script>

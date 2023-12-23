@@ -17,7 +17,7 @@ const addQuestion = async () => {
     showError.value = false;
     errorMessage.value = '';
     const res = await axios.post(
-      'http://localhost:5000/posts/addQuestion',
+      'http://localhost:8080/posts/addQuestion',
       {
         text: questionText.value,
         tag: tag.value === '' ? 'General' : tag.value
@@ -29,7 +29,7 @@ const addQuestion = async () => {
         }
       }
     );
-    if(res.status === 200){
+    if (res.status === 200) {
       questionText.value = '';
       tag.value = '';
     }
