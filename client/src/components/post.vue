@@ -24,7 +24,7 @@ onMounted(() => {
 
 const isUpvoted = async () => {
   const res = await axios.post(
-    'http://localhost:8080/votes/isUpvoted',
+    `${import.meta.env.VITE_API}/votes/isUpvoted`,
     {
       answerId: props.answer._id
     },
@@ -41,7 +41,7 @@ const isUpvoted = async () => {
 
 const isDownvoted = async () => {
   const res = await axios.post(
-    'http://localhost:8080/votes/isDownvoted',
+    `${import.meta.env.VITE_API}/votes/isDownvoted`,
     {
       answerId: props.answer._id
     },
@@ -67,7 +67,7 @@ const closeModal = () => {
 
 const getAllUpvotes = async () => {
   const res = await axios.post(
-    'http://localhost:8080/votes/allUpvotes',
+    `${import.meta.env.VITE_API}/votes/allUpvotes`,
     {
       answerId: props.answer._id
     },
@@ -88,7 +88,7 @@ const upvote = async () => {
   isUpvote.value = true;
   upvoteCount.value += 1;
   const res = await axios.post(
-    'http://localhost:8080/votes/upvote',
+    `${import.meta.env.VITE_API}/votes/upvote`,
     {
       answerId: props.answer._id,
       upvotes: upvoteCount.value
@@ -105,7 +105,7 @@ const downvote = async () => {
   removeUpvote();
   isDownvote.value = true;
   const res = await axios.post(
-    'http://localhost:8080/votes/downvote',
+    `${import.meta.env.VITE_API}/votes/downvote`,
     {
       answerId: props.answer._id
     },
@@ -120,7 +120,7 @@ const downvote = async () => {
 const removeDownvote = async () => {
   isDownvote.value = false;
   const res = await axios.post(
-    'http://localhost:8080/votes/removeDownvote',
+    `${import.meta.env.VITE_API}/votes/removeDownvote`,
     {
       answerId: props.answer._id
     },
@@ -138,7 +138,7 @@ const removeUpvote = async () => {
   }
   isUpvote.value = false;
   const res = await axios.post(
-    'http://localhost:8080/votes/removeUpvote',
+    `${import.meta.env.VITE_API}/votes/removeUpvote`,
     {
       answerId: props.answer._id,
       upvotes: upvoteCount.value

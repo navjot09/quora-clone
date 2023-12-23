@@ -28,11 +28,14 @@ const handleSignUp = async (e) => {
     errorMessage.value = 'Please Enter a valid E-mail id.';
     showError.value = true;
   } else {
-    const response = await axios.post('http://localhost:8080/auth/createUser', {
-      email: user.email,
-      password: user.password,
-      name: user.name
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_API}/auth/createUser`,
+      {
+        email: user.email,
+        password: user.password,
+        name: user.name
+      }
+    );
     switch (response.status) {
       case 200:
         showError.value = false;

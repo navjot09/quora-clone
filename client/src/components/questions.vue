@@ -22,7 +22,7 @@ const handleSubmitAnswer = async () => {
     showError.value = false;
     errorMessage.value = '';
     const res = await axios.post(
-      'http://localhost:8080/posts/addAnswer',
+      `${import.meta.env.VITE_API}/posts/addAnswer`,
       {
         text: answer.value,
         question: {

@@ -16,7 +16,7 @@ const cookies = getCookies();
 onMounted(async () => {
   loader.loading = true;
   const res = await axios.post(
-    'http://localhost:8080/posts/getAllQuestions',
+    `${import.meta.env.VITE_API}/posts/getAllQuestions`,
     {},
     {
       headers: {
